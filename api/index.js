@@ -1,18 +1,14 @@
 const express = require('express')
-const bodyParser = require('body-parser')
+const routes = require('./routes')
 
 const app = express()
 
-app.use(bodyParser.json()) 
-
 const porta = 3000
 
-app.get('/test', (req,res) => {
-    res.status(200).send('você esta usando o metodo GET')
-})
+
+routes(app)
 
 app.listen(porta, () => console.log(`servidor rodando na porta ${porta}`))
-
 
 module.exports = app
 

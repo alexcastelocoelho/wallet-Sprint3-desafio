@@ -14,9 +14,35 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Carteira.init({
-    name: DataTypes.STRING(90),
-    cpf: DataTypes.STRING(14),
-    birthday: DataTypes.DATEONLY
+    name: {
+      type: DataTypes.STRING(90),
+      validate: {
+        len: {
+          args: [7,90],
+          msg: 'nome precisa ter no minimo 7 caracteres'
+        }
+      }
+    
+    },
+    cpf: {
+      type: DataTypes.STRING(14),
+      validate: {
+        is: {
+          args : /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
+          msg: 'cpf invalido, use o formato xxx.xxx.xxx-xx'
+        }
+        
+      }
+
+    },
+    birthday:  DataTypes.DATEONLY,
+    address: {
+      allowNull:false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+  
   }, {
     sequelize,
     modelName: 'Carteira',

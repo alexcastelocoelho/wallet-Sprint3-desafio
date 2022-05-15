@@ -1,21 +1,27 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Carteiras', {
-      address: {
+    await queryInterface.createTable('transacoes', {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING(90)
+      value: {
+        type: Sequelize.FLOAT
       },
-      cpf: {
-        type: Sequelize.STRING(14)
+      datetime: {
+        type: Sequelize.DATE
       },
-      birthday: {
-        type: Sequelize.DATEONLY
+      sendTo: {
+        type: Sequelize.INTEGER
+      },
+      receiveFrom: {
+        type: Sequelize.INTEGER
+      },
+      currentCotation: {
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Carteiras');
+    await queryInterface.dropTable('transacoes');
   }
 };

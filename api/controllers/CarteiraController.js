@@ -12,11 +12,11 @@ class CarteiraController { //declara os metodos que serao usados
     }
 
     static async pegaUmaCarteira(req,res) {
-        const { id } = req.params
+        const { address } = req.params
         try{
             const umaCarteira = await database.Carteira.findOne( {
             where : {
-                id: Number(id) 
+                address: Number(address) 
               }
             })
             return res.status(200).json(umaCarteira)
@@ -37,14 +37,14 @@ class CarteiraController { //declara os metodos que serao usados
     }
 
     static async atualizaCarteira(req, res) {
-        const { id } = req.params
+        const { address } = req.params
         const novaInfos = req.body
 
          try {
-            await database.Carteira.update(novaInfos, { where: {id: Number(id)}}
+            await database.Carteira.update(novaInfos, { where: {address: Number(address)}}
             )
             const carteiraAtualizada = await database.Carteira.findOne( {where: {
-                id: Number(id)
+                address: Number(address)
             }}) 
             return res.status(200).json(carteiraAtualizada)
          } catch (error) {
@@ -54,10 +54,10 @@ class CarteiraController { //declara os metodos que serao usados
     }
 
     static async apagaCarteira(req, res) {
-        const { id } = req.params
+        const { address } = req.params
         try {
-            await database.Carteira.destroy( { where: { id: Number(id)}})
-           return res.status(200).json({ mensagem: `id ${id} deletado`}) 
+            await database.Carteira.destroy( { where: { address: Number(address)}})
+           return res.status(200).json({ mensagem: `address ${address} deletado`}) 
         } catch (error) {
             return res.status(500).json(error.message)
         }

@@ -35,7 +35,15 @@ module.exports = (sequelize, DataTypes) => {
       }
 
     },
-    birthday:  DataTypes.DATEONLY,
+    birthday: {
+      type: DataTypes.DATEONLY,
+      validate: {
+        isBefore: {
+          args: '2004-01-01',
+          msg: 'voce precisa ser maior que 18 anos'
+        }
+      }
+    },
     address: {
       allowNull:false,
       autoIncrement: true,
